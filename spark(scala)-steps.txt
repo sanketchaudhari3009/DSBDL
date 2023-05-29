@@ -1,0 +1,22 @@
+1. open the terminal in the directory with the input file (input.txt)
+
+2. launch spark shell by: spark-shell
+
+3. Enter the following commands - 
+
+	var linesRDD = sc.textFile("input.txt")
+	var wordsRDD = linesRDD.flatMap(_.split(" "))
+	var wordsKvRdd = wordsRDD.map((_, 1))
+	var wordCounts = wordsKvRdd.reduceByKey(_ + _ )
+	wordCounts.saveAsTextFile("myopt")
+	wordCounts.foreach(println)
+
+4. Expected output - 
+
+	(hemlo,17)
+	(Hello,7)
+	(Hi,16)
+	(Hello,17)
+	(,1)
+	(hola,17)
+	(helo,17)
